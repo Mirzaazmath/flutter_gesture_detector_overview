@@ -6,10 +6,10 @@ A new Flutter project.
 
 
 
-# onDoubleTap
+#  onLongPressed
 
 
-<img src="https://github.com/Mirzaazmath/flutter_gesture_detector_overview/blob/onDoubleTap/assets/result.gif" height="400">
+<img src="https://github.com/Mirzaazmath/flutter_gesture_detector_overview/blob/onLongPressed/assets/result.gif" height="400">
 
 This project is a starting point for a Flutter application.
 
