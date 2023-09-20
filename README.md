@@ -6,10 +6,10 @@ A new Flutter project.
 
 
 
-#  onLongPressed
+#  onTapUpAndDown
 
 
-<img src="https://github.com/Mirzaazmath/flutter_gesture_detector_overview/blob/onLongPressed/assets/result.gif" height="400">
+<img src="https://github.com/Mirzaazmath/flutter_gesture_detector_overview/blob/onTapUpAndDown/assets/result.gif" height="400">
 
 This project is a starting point for a Flutter application.
 
