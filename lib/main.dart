@@ -22,11 +22,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  double height=60;
+  double width=120;
+  bool isPressed=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("TAP"),
+        title: const Text("Long Pressed"),
       ),
       body: Center(
         child: GestureDetector(
@@ -36,9 +39,18 @@ class _HomeScreenState extends State<HomeScreen> {
           onDoubleTap: (){
             showGestureDoubleTap();
             },
-          child: Container(
-            height: 60,
-            width: 120,
+          onLongPress: (){
+            setState(() {
+              isPressed=!isPressed;
+              height=isPressed?100:60;
+              width=isPressed?160:120;
+            });
+            },
+          child: AnimatedContainer(
+            duration:const  Duration(milliseconds: 200),
+            curve: Curves.easeInOutBack,
+            height: height,
+            width: width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
              gradient: const LinearGradient(
