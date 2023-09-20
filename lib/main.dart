@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 void main(){
@@ -22,49 +24,79 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  double height=60;
-  double width=120;
-  bool isPressed=false;
+
+Color color1=Colors.blueAccent;
+
+Color color2=Colors.cyan;
+  Timer? _timer;
+  int _totaltime = 0;
+
+  void startTimer() {
+    _totaltime=0;
+      const duration = const Duration(milliseconds: 100);
+    _timer = new Timer.periodic(duration, (Timer timer) {
+      setState(() {
+        _totaltime++;
+      });
+    }
+    );
+  }
+  void stopTimer(){
+    _timer?.cancel();
+
+  }
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Long Pressed"),
+        title: const Text("onTapDown & onTapUP"),
       ),
-      body: Center(
-        child: GestureDetector(
-          onTap: (){
-            showGestsureTap();
-          },
-          onDoubleTap: (){
-            showGestureDoubleTap();
-            },
-          onLongPress: (){
-            setState(() {
-              isPressed=!isPressed;
-              height=isPressed?100:60;
-              width=isPressed?160:120;
-            });
-            },
-          child: AnimatedContainer(
-            duration:const  Duration(milliseconds: 200),
-            curve: Curves.easeInOutBack,
-            height: height,
-            width: width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-             gradient: const LinearGradient(
-               colors: [
-                 Colors.blueAccent,
-                 Colors.cyan,
-               ]
-             )
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Total Time == $_totaltime",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),),
+          const SizedBox(height: 50,),
+          Center(
+            child: GestureDetector(
+             onTapDown: (TapDownDetails details){
+               setState(() {
+                 color1=Colors.red;
+                 color2=Colors.orange;
+               });
+               startTimer();
+               },
+              onTapUp: (TapUpDetails details){
+                setState(() {
+                  color1=Colors.blueAccent;
+                  color2=Colors.cyan;
+                });
+               stopTimer();
+               },
+              child: Container(
+                height: 60,
+                width: 120,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                 gradient:  LinearGradient(
+                   colors: [
+                     color1,
+                     color2
+                   ]
+                 )
 
+                ),
+                alignment: Alignment.center,
+                child:const  Text("Tap",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),
+              ),
             ),
-            alignment: Alignment.center,
-            child:const  Text("Tap",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -99,3 +131,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
