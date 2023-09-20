@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 void main(){
   runApp(MyApp());
 }
@@ -32,6 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: (){
             showGestsureTap();
           },
+          onDoubleTap: (){
+            showGestureDoubleTap();
+            },
           child: Container(
             height: 60,
             width: 120,
@@ -69,5 +73,17 @@ class _HomeScreenState extends State<HomeScreen> {
     // Find the ScaffoldMessenger in the widget tree
     // and use it to show a SnackBar.
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  showGestureDoubleTap(){
+    Fluttertoast.showToast(
+        msg: "Gesture DoubleTap Pressed",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
   }
 }
